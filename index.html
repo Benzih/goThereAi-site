@@ -4,38 +4,135 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GoThereAI – בקרוב</title>
+  <meta name="color-scheme" content="dark light">
   <style>
-    :root { --bg:#0f172a; --fg:#e2e8f0; --accent:#38bdf8 }
-    html,body {height:100%;margin:0;direction:rtl;text-align:right;}
-    body {
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,#0f172a,#111827);
-      font-family:system-ui,Arial
+    :root{
+      --bg1:#0b1220; --bg2:#0f172a; --bg3:#111827;
+      --panel:#0e1627cc; --white:#fff; --muted:#cdd6e5;
+      --accent:#38bdf8; --accent2:#a78bfa;
     }
-    .card {
-      max-width:720px;padding:40px 28px;text-align:center;
-      border-radius:18px;background:#0b1220aa;
-      backdrop-filter:blur(4px)
+
+    /* ===== בסיס ===== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; direction:rtl; text-align:right; 
+      font-family:system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", sans-serif;
+      color:var(--white);
+      /* רקע גרדיאנט זז בעדינות */
+      background: radial-gradient(1200px 800px at 10% 20%, #1b2a4a88, transparent 60%),
+                  radial-gradient(1100px 700px at 90% 80%, #422b9955, transparent 60%),
+                  linear-gradient(135deg,var(--bg1),var(--bg2) 50%,var(--bg3));
+      background-size: 140% 140%;
+      animation: moveBg 18s ease-in-out infinite alternate;
+      display:grid; place-items:center; padding:24px;
     }
-    h1 {margin:0 0 10px;color:#fff;font-size:36px;letter-spacing:.5px}
-    p {margin:0 0 20px;color:var(--fg);line-height:1.6}
-    .badge {
-      display:inline-block;padding:10px 20px;border-radius:999px;
-      background:rgb(56,189,248,.18);color:#38bdf8;font-weight:600
+    @keyframes moveBg{
+      0%{background-position: 0% 0%, 100% 100%, 0% 0%}
+      100%{background-position: 20% 30%, 85% 60%, 100% 100%}
     }
-    .cta {
-      display:inline-block;margin-top:10px;padding:12px 18px;
-      border-radius:12px;border:1px solid #1f2937;background:#93c5fd;
-      color:#0b1220;text-decoration:none;font-weight:700
+
+    /* אלמנטים דקורטיביים עדינים */
+    .glow, .glow::after{
+      position:absolute; inset:0; pointer-events:none;
+      filter: blur(40px); opacity:.18;
+      background:
+        radial-gradient(400px 200px at 85% 15%, #60a5fa55, transparent 60%),
+        radial-gradient(420px 220px at 10% 85%, #a78bfa55, transparent 60%);
+    }
+    .glow::after{
+      content:""; filter: blur(60px); opacity:.18;
+      background:
+        radial-gradient(360px 200px at 20% 20%, #22d3ee55, transparent 60%),
+        radial-gradient(420px 220px at 80% 80%, #f472b655, transparent 60%);
+      animation: drift 30s ease-in-out infinite alternate;
+    }
+    @keyframes drift{to{transform:translateY(-1.5%) translateX(1.5%)}}
+
+    /* ===== כרטיס מרכזי ===== */
+    .card{
+      position:relative;
+      max-width:780px; width:min(94vw,780px);
+      background:var(--panel);
+      border:1px solid #243045;
+      border-radius:22px;
+      padding:44px 32px 36px;
+      backdrop-filter:saturate(120%) blur(6px);
+      box-shadow: 0 20px 60px #0008, inset 0 1px 0 #ffffff14;
+    }
+
+    .badge{
+      display:inline-flex; gap:.5rem; align-items:center; 
+      padding:10px 18px; border-radius:999px;
+      background:linear-gradient(90deg,#0ea5e980,#8b5cf680);
+      color:#eaf6ff; font-weight:700; letter-spacing:.2px;
+      border:1px solid #ffffff2a;
+      box-shadow:0 8px 20px #0ea5e955;
+      animation: float 4s ease-in-out infinite;
+    }
+    .badge .rocket{display:inline-block; transform:translateY(2px); animation: rocket .9s ease-in-out infinite}
+    @keyframes float{50%{transform:translateY(-3px)}}
+    @keyframes rocket{50%{transform:translateY(-2px) rotate(-4deg)}}
+
+    h1{
+      margin:18px 0 12px; line-height:1.15;
+      font-size:clamp(34px,5vw,56px); letter-spacing:.4px;
+    }
+
+    /* הטקסט בשורות עם כניסה מימין */
+    .lines{margin-top:6px}
+    .line{
+      display:block;
+      color:var(--muted);
+      font-size:clamp(16px,2.2vw,20px);
+      line-height:1.75;
+      opacity:0; transform:translateX(30px);
+      animation: enterRight .8s cubic-bezier(.22,.7,.2,1) forwards;
+      animation-delay: calc(var(--i)*140ms + 200ms);
+      will-change: transform, opacity;
+    }
+    @keyframes enterRight{
+      to{opacity:1; transform:translateX(0)}
+    }
+
+    .cta{
+      display:inline-block; margin-top:22px; padding:14px 22px;
+      border-radius:14px; border:1px solid #1f2937;
+      background:linear-gradient(180deg,#60a5fa,#3b82f6);
+      color:#0b1220; text-decoration:none; font-weight:800;
+      letter-spacing:.3px;
+      box-shadow: 0 10px 22px #3b82f644, inset 0 1px 0 #ffffffa8;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .cta:hover{ transform:translateY(-2px); box-shadow:0 16px 30px #3b82f66a }
+    .cta:active{ transform:translateY(0) scale(.99) }
+
+    /* נגישות – לכבד העדפת “ללא אנימציה” */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="badge">GoThereAI 🚀</div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="card" role="main">
+    <div class="badge">
+      <span class="rocket">🚀</span>
+      <span>GoThereAI</span>
+    </div>
+
     <h1>בקרוב</h1>
-    <p>האתר הרשמי יעלה כאן בקרוב. סקירה הסטורית , גיאוגרפית, דירוגים, ניווט ... בקליק אחד — מופעל ב-AI.</p>
+
+    <div class="lines" aria-live="polite">
+      <span class="line" style="--i:0">האתר הרשמי יעלה כאן בקרוב.</span>
+      <span class="line" style="--i:1">סקירה היסטורית, גיאוגרפית ודירוגים.</span>
+      <span class="line" style="--i:2">ניווט חכם — בקליק אחד.</span>
+      <span class="line" style="--i:3">מופעל ב-AI.</span>
+    </div>
+
     <a class="cta" href="mailto:benziheler@gmail.com">צרו קשר</a>
-  </div>
+  </main>
 </body>
 </html>
