@@ -11,10 +11,7 @@
       --panel:#0e1627cc; --white:#fff; --muted:#cdd6e5;
       --stroke:#243045; --chip:#0f193080; --chip-stroke:#21314b;
       --primary:#0ea5e9; --primary-2:#38bdf8; --accent:#a78bfa;
-      --delay-step: 340ms;
-      --enter-dur: 1.35s;
-      --bg-dur: 36s;
-      --float-dur: 6.2s;
+      --delay-step:340ms; --enter-dur:1.35s; --bg-dur:36s; --float-dur:6.2s;
     }
 
     *{box-sizing:border-box}
@@ -23,7 +20,7 @@
     body{
       margin:0;
       direction:rtl; text-align:right;
-      font-family:system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", sans-serif;
+      font-family:system-ui,-apple-system,"Segoe UI",Arial,"Noto Sans Hebrew",sans-serif;
       color:var(--white);
       background:
         radial-gradient(1200px 800px at 10% 20%, #1b2a4a88, transparent 60%),
@@ -31,25 +28,22 @@
         linear-gradient(135deg,var(--bg1),var(--bg2) 50%,var(--bg3));
       background-size:140% 140%;
       animation: moveBg var(--bg-dur) ease-in-out infinite alternate;
-      display:grid; place-items:center;
-      padding:24px;
+      display:grid; place-items:center; padding:24px;
     }
     @keyframes moveBg{
-      0%   {background-position: 0% 0%, 100% 100%, 0% 0%}
-      100% {background-position: 18% 28%, 86% 64%, 100% 100%}
+      0%{background-position:0% 0%, 100% 100%, 0% 0%}
+      100%{background-position:18% 28%, 86% 64%, 100% 100%}
     }
 
-    .wrap{position:relative; width:min(96vw, 860px)}
-
-    .glow, .glow::after{
-      position:absolute; inset:-6vmax; pointer-events:none;
-      filter: blur(48px); opacity:.16;
+    .wrap{position:relative; width:min(96vw, 920px)}
+    .glow,.glow::after{
+      position:absolute; inset:-6vmax; pointer-events:none; filter:blur(48px); opacity:.16;
       background:
         radial-gradient(420px 240px at 85% 15%, #60a5fa55, transparent 60%),
         radial-gradient(460px 260px at 12% 88%, #a78bfa55, transparent 60%);
     }
     .glow::after{
-      content:""; filter: blur(68px); opacity:.18;
+      content:""; filter:blur(68px); opacity:.18;
       background:
         radial-gradient(360px 200px at 20% 20%, #22d3ee55, transparent 60%),
         radial-gradient(420px 220px at 80% 80%, #f472b655, transparent 60%);
@@ -58,113 +52,123 @@
     @keyframes drift{to{transform:translateY(-1.8%) translateX(1.8%)}}
 
     .card{
-      position:relative;
+      position:relative; text-align:center;
       background:var(--panel);
-      border:1px solid var(--stroke);
-      border-radius:24px;
-      padding:52px 36px 42px;
+      border:1px solid var(--stroke); border-radius:24px;
+      padding:46px 36px 42px;
       backdrop-filter:saturate(120%) blur(6px);
-      box-shadow: 0 24px 64px #0008, inset 0 1px 0 #ffffff14;
-      text-align:center;
+      box-shadow:0 24px 64px #0008, inset 0 1px 0 #ffffff14;
     }
 
-    /* לוגו ראשי */
-    .logo-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(90deg, #0ea5e9, #6366f1);
-      padding: 14px 28px;
-      border-radius: 999px;
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.6);
-      animation: glowPulse 3s infinite ease-in-out;
-      margin-bottom: 20px;
+    /* תגית הרוקט הקטנה (מעל) עם שובל */
+    .logo-badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      font-size:28px; font-weight:700; color:#fff;
+      background:linear-gradient(90deg,#0ea5e9,#6366f1);
+      padding:12px 24px; border-radius:999px;
+      box-shadow:0 0 25px rgba(99,102,241,.6);
+      animation:glowPulse 3s infinite ease-in-out;
+      margin-bottom:14px; position:relative;
     }
-    .logo-badge span {
-      margin-right: 10px;
-      font-size: 22px;
+    .logo-badge::before{
+      content:"🚀"; font-size:32px; margin-left:10px;
+      animation:rocketBounce 2s infinite ease-in-out; position:relative; z-index:2;
     }
-    .logo-badge::before {
-      content: "🚀";
-      font-size: 34px;
-      margin-left: 10px;
-      animation: rocketBounce 2s infinite ease-in-out;
+    /* שובל אש */
+    .logo-badge::after{
+      content:""; position:absolute; left:12px; bottom:-8px; width:10px; height:22px;
+      background:radial-gradient(circle at 50% 0%, #fbbf24, #f97316 70%, transparent 100%);
+      border-radius:50%; filter:blur(4px); opacity:.8; z-index:1;
+      animation:flameFlicker .4s infinite alternate;
     }
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
-      50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.9); }
-      100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); }
+    @keyframes glowPulse{
+      0%{box-shadow:0 0 15px rgba(99,102,241,.4)}
+      50%{box-shadow:0 0 40px rgba(99,102,241,.9)}
+      100%{box-shadow:0 0 15px rgba(99,102,241,.4)}
     }
-    @keyframes rocketBounce {
-      0%, 100% { transform: scale(1) translateY(0); }
-      50% { transform: scale(1.3) translateY(-6px); }
+    @keyframes rocketBounce{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.3) translateY(-6px)}}
+    @keyframes flameFlicker{0%{transform:scaleY(1) scaleX(.8);opacity:.9}100%{transform:scaleY(1.4) scaleX(1);opacity:.6}}
+
+    /* === לוגו טקסט ענק עם גרדיאנט אנימטיבי ושֵיין === */
+    .brand{
+      position:relative; display:inline-block; line-height:1; margin:6px auto 6px;
+      filter:drop-shadow(0 18px 40px rgba(56,189,248,.20));
+    }
+    .brand span{
+      display:inline-block;
+      font-weight:1000; letter-spacing:.02em;
+      font-size:clamp(56px, 13vw, 160px);                 /* כאן מגדילים משמעותית */
+      background:
+        linear-gradient(90deg,
+          #60a5fa 0%,
+          #a78bfa 20%,
+          #34d399 45%,
+          #f472b6 70%,
+          #60a5fa 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      animation:brandFlow 8s linear infinite;
+      -webkit-text-stroke:1px rgba(255,255,255,.08);      /* קונטור עדין */
+      text-shadow:0 8px 24px rgba(15,23,42,.6);
+    }
+    @keyframes brandFlow{
+      0%{background-position:0% 50%}
+      100%{background-position:200% 50%}
+    }
+    /* שכבת שיין שגולשת על האותיות */
+    .brand::after{
+      content:attr(data-text);
+      position:absolute; inset:0;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      background:
+        linear-gradient(75deg, transparent 20%,
+          rgba(255,255,255,.85) 45%,
+          transparent 60%);
+      mix-blend-mode:screen;
+      animation:shineSweep 4.8s ease-in-out infinite;
+    }
+    @keyframes shineSweep{
+      0%{transform:translateX(-140%)}
+      100%{transform:translateX(140%)}
     }
 
-    h1{
-      margin:18px 0 12px;
-      font-size:clamp(40px,7vw,66px);
-      letter-spacing:.5px;
-    }
+    /* כותרות/טקסט */
+    h1{ margin:14px 0 10px; font-size:clamp(40px,7vw,66px); letter-spacing:.5px }
 
     .lines{margin-top:10px}
     .line{
-      display:block;
-      color:var(--muted);
-      font-size:clamp(16px,2.2vw,20px);
-      line-height:1.9;
+      display:block; color:var(--muted);
+      font-size:clamp(16px,2.2vw,20px); line-height:1.9;
       opacity:0; transform:translateX(38px);
-      animation: enterRight var(--enter-dur) ease-out forwards;
-      animation-delay: calc(var(--i)*var(--delay-step) + 260ms);
+      animation:enterRight var(--enter-dur) ease-out forwards;
+      animation-delay:calc(var(--i)*var(--delay-step) + 260ms);
     }
     .line b{color:#fff}
     @keyframes enterRight{to{opacity:1; transform:translateX(0)}}
 
-    .bullets{
-      margin-top:14px; display:grid; gap:12px; justify-items:center;
-    }
+    .bullets{ margin-top:14px; display:grid; gap:12px; justify-items:center }
     .item{
-      display:flex; gap:12px; align-items:center;
-      color:var(--muted);
-      font-size:clamp(15px,2vw,19px);
-      padding:12px 18px; border-radius:14px;
+      display:flex; gap:12px; align-items:center; color:var(--muted);
+      font-size:clamp(15px,2vw,19px); padding:12px 18px; border-radius:14px;
       background:var(--chip); border:1px solid var(--chip-stroke);
-      width:max-content;
-      opacity:0; transform:translateX(38px);
-      animation: enterRight var(--enter-dur) ease-out forwards;
-      animation-delay: calc(var(--i)*var(--delay-step) + 260ms);
+      width:max-content; opacity:0; transform:translateX(38px);
+      animation:enterRight var(--enter-dur) ease-out forwards;
+      animation-delay:calc(var(--i)*var(--delay-step) + 260ms);
     }
 
-    .contact{
-      margin-top:30px;
-      display:flex; flex-direction:column; gap:12px;
-      align-items:center;
-    }
+    .contact{ margin-top:30px; display:flex; flex-direction:column; gap:12px; align-items:center }
     .btn{
-      display:inline-block;
-      padding:12px 20px;
-      border-radius:12px;
-      border:1px solid #1f2937;
-      background:linear-gradient(180deg,#60a5fa,#3b82f6);
+      display:inline-block; padding:12px 20px; border-radius:12px;
+      border:1px solid #1f2937; background:linear-gradient(180deg,#60a5fa,#3b82f6);
       color:#0b1220; text-decoration:none; font-weight:900;
-      width:min(75%, 320px);
-      text-align:center;
-      transition:all .35s ease;
+      width:min(75%, 340px); text-align:center; transition:all .35s ease;
       opacity:0; transform:translateX(38px);
-      animation: enterRight var(--enter-dur) ease-out forwards;
-      animation-delay: calc(var(--i)*var(--delay-step) + 260ms);
+      animation:enterRight var(--enter-dur) ease-out forwards;
+      animation-delay:calc(var(--i)*var(--delay-step) + 260ms);
     }
-    .btn:hover{
-      background:#3aa8ff;
-      transform:translateY(-2px);
-      box-shadow:0 6px 16px rgba(56,189,248,.35);
-    }
+    .btn:hover{ background:#3aa8ff; transform:translateY(-2px); box-shadow:0 6px 16px rgba(56,189,248,.35) }
 
-    @media (max-width:480px){
-      .btn{width:100%}
-    }
+    @media (max-width:480px){ .btn{width:100%} }
   </style>
 </head>
 <body>
@@ -172,7 +176,13 @@
     <div class="glow"></div>
     <main class="card">
 
-      <div class="logo-badge"><span>GoThereAI</span></div>
+      <!-- תגית רוקט קטנה למעלה -->
+      <div class="logo-badge">GoThereAI</div>
+
+      <!-- כיתוב ענק עם גרדיאנט אנימטיבי ושיין -->
+      <div class="brand" data-text="GoThereAI">
+        <span>GoThereAI</span>
+      </div>
 
       <h1>בקרוב</h1>
 
@@ -199,6 +209,7 @@
         <a class="btn" style="--i:10" href="mailto:benziheler@gmail.com">✉️ benziheler@gmail.com</a>
         <a class="btn" style="--i:11" href="https://wa.me/972546488811" target="_blank" rel="noopener">💬 שלחו הודעת WhatsApp</a>
       </div>
+
     </main>
   </div>
 </body>
