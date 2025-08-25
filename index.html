@@ -5,162 +5,80 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GoThereAI — בקרוב</title>
 <style>
-  :root{
-    --bg1:#0b1220; --bg2:#0f172a; --bg3:#111827;
-    --panel:#0e1627cc; --white:#fff; --muted:#cdd6e5;
-    --stroke:#243045; --chip:#0f193080; --chip-stroke:#21314b;
-    --primary:#0ea5e9; --accent:#a78bfa;
-    --delay-step:360ms;
-    --enter:1.35s;
-    --bg-dur:38s;
+  body {
+    margin:0; height:100vh; display:flex; justify-content:center; align-items:center;
+    background: radial-gradient(circle at 20% 30%, #1e293b, #0f172a 70%);
+    font-family: system-ui, sans-serif; color:white;
   }
-
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    direction:rtl;
-    font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Hebrew",Arial,sans-serif;
-    color:var(--white);
-    background:
-      radial-gradient(1200px 800px at 12% 20%, #1b2a4a88, transparent 60%),
-      radial-gradient(1100px 700px at 90% 85%, #422b9955, transparent 60%),
-      linear-gradient(135deg,var(--bg1),var(--bg2) 50%,var(--bg3));
-    background-size:140% 140%;
-    animation: moveBg var(--bg-dur) ease-in-out infinite alternate;
-    display:grid; place-items:center;
-    padding:20px;
+  .globe {
+    width: 280px; height: 280px;
   }
-  @keyframes moveBg{
-    0% {background-position:0% 0%,100% 100%,0% 0%}
-    100%{background-position:18% 28%,86% 64%,100% 100%}
+  text {
+    font-weight: 900;
+    font-size: 48px;
   }
-
-  .wrap{position:relative;width:min(96vw,920px)}
-  .card{
-    position:relative;text-align:center;
-    background:var(--panel);
-    border:1px solid var(--stroke);
-    border-radius:26px;
-    padding:48px 34px 44px;
-    backdrop-filter:saturate(120%) blur(6px);
-    box-shadow:0 26px 64px #0008, inset 0 1px 0 #ffffff16;
-  }
-
-  /* שורת לוגו */
-  .brand-row{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
-  .brand{
-    font-size:clamp(42px,9vw,86px);
-    font-weight:1000;
-    background:linear-gradient(90deg,#60a5fa,#a78bfa,#60a5fa);
-    -webkit-background-clip:text;background-clip:text;
-    color:transparent;background-size:200% 100%;
-    animation: shift 10s linear infinite;
-    text-shadow:0 6px 24px #0006;
-  }
-  @keyframes shift{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-
-  h2{margin:8px 0 12px;font-size:clamp(36px,7vw,64px)}
-
-  /* שורות טקסט */
-  .lines{margin-top:10px}
-  .line{display:block;color:var(--muted);font-size:clamp(16px,2.2vw,20px);
-    line-height:1.95;opacity:0;transform:translateX(38px);
-    animation: enterRight var(--enter) ease-out forwards;
-    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);}
-  .line b{color:#fff}
-  @keyframes enterRight{to{opacity:1; transform:translateX(0)}}
-
-  /* נקודות */
-  .bullets{margin-top:16px;display:grid;gap:12px;justify-items:center}
-  .item{display:flex;gap:12px;align-items:center;color:var(--muted);
-    font-size:clamp(15px,2vw,19px);padding:12px 18px;border-radius:14px;
-    background:var(--chip);border:1px solid var(--chip-stroke);
-    opacity:0;transform:translateX(38px);
-    animation: enterRight var(--enter) ease-out forwards;
-    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);}
-
-  /* כפתורי יצירת קשר */
-  .contact{margin-top:30px;display:flex;flex-direction:column;gap:12px;align-items:center}
-  .btn{display:inline-block;width:min(75%,360px);text-align:center;
-    padding:13px 20px;border-radius:12px;border:1px solid #1f2937;
-    background:linear-gradient(180deg,#60a5fa,#3b82f6);color:#0b1220;font-weight:900;text-decoration:none;
-    opacity:0;transform:translateX(38px);
-    animation: enterRight var(--enter) ease-out forwards;
-    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);}
-  .btn:hover{background:#3aa8ff;transform:translateY(-2px);box-shadow:0 6px 16px rgba(56,189,248,.35)}
-  @media (max-width:520px){.btn{width:100%}}
-
-  /* גלובוס */
-  .globe{width:clamp(80px,16vw,150px);aspect-ratio:1/1;filter:drop-shadow(0 10px 18px #0007)}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <main class="card">
-      <div class="brand-row">
-        <!-- אייקון גלובוס AI -->
-        <svg class="globe" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="gBlue" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stop-color="#6ee7ff"/>
-              <stop offset="55%" stop-color="#45b8ff"/>
-              <stop offset="100%" stop-color="#3a8bff"/>
-            </radialGradient>
-            <path id="outerOrbitPath" cx="100" cy="100" r="88" d="M 100,12 A 88,88 0 1,1 99.9,12 Z" fill="none"/>
-            <linearGradient id="sheenGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-              <stop offset="40%" stop-color="#ffffff" stop-opacity=".8"/>
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <!-- כדור -->
-          <circle cx="100" cy="100" r="70" fill="url(#gBlue)" stroke="#ffffff22" stroke-width="2"/>
-          <!-- טקסט AI -->
-          <text x="100" y="116" text-anchor="middle" font-size="50" font-weight="900" fill="#fff">AI</text>
-          <!-- הבזק על הטקסט -->
-          <g clip-path="url(#clipText)">
-            <rect x="-150" y="80" width="100" height="50" fill="url(#sheenGrad)">
-              <animate attributeName="x" values="-150;250;-150" dur="5s" repeatCount="indefinite"/>
-            </rect>
-          </g>
-          <clipPath id="clipText"><text x="100" y="116" text-anchor="middle" font-size="50" font-weight="900">AI</text></clipPath>
-          <!-- לווין גדול -->
-          <circle r="9" fill="#fff" stroke="#00f6ff" stroke-width="2">
-            <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
-              <mpath xlink:href="#outerOrbitPath"/>
-            </animateMotion>
-          </circle>
-        </svg>
-        <div class="brand">GoThereAI</div>
-      </div>
+<svg class="globe" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- גרדיאנט פנימי -->
+    <radialGradient id="earthGradient" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#6ee7ff"/>
+      <stop offset="70%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </radialGradient>
+    <!-- נתיבי מסלול -->
+    <path id="orbit1" d="M 100,15 A 85,85 0 1,1 99.9,15 Z" fill="none"/>
+    <path id="orbit2" d="M 100,25 A 75,75 0 1,1 99.9,25 Z" fill="none"/>
+    <path id="orbit3" d="M 100,40 A 60,60 0 1,1 99.9,40 Z" fill="none"/>
+    <!-- גרדיאנט שיין לטקסט -->
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#fff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
 
-      <h2>בקרוב</h2>
+  <!-- כדור הארץ -->
+  <circle cx="100" cy="100" r="85" fill="url(#earthGradient)" stroke="#ffffff33" stroke-width="2">
+    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite"/>
+  </circle>
 
-      <div class="lines">
-        <span class="line" style="--i:0">האתר הרשמי יעלה כאן בקרוב.</span>
-        <span class="line" style="--i:1">סקירה היסטורית – <b>הקראה</b>.</span>
-        <span class="line" style="--i:2">כל מה שצריך לדעת על המקום:</span>
-      </div>
+  <!-- קווי מסלול פנימיים (כמו קווי אורך/רוחב) -->
+  <ellipse cx="100" cy="100" rx="70" ry="20" stroke="#38bdf877" fill="none">
+    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="12s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="100" cy="100" rx="50" ry="15" stroke="#60a5fa55" fill="none">
+    <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="10s" repeatCount="indefinite"/>
+  </ellipse>
 
-      <div class="bullets">
-        <div class="item" style="--i:3">🍽️ <span>מסעדות</span></div>
-        <div class="item" style="--i:4">🏨 <span>בתי מלון</span></div>
-        <div class="item" style="--i:5">🗺️ <span>אתרים בסביבה</span></div>
-        <div class="item" style="--i:6">⛽ <span>תחנות דלק</span></div>
-      </div>
+  <!-- טקסט AI במרכז עם שיין -->
+  <text x="100" y="115" text-anchor="middle" fill="#ffffffdd">AI</text>
+  <text x="100" y="115" text-anchor="middle" fill="url(#shine)">AI
+    <animate attributeName="x" values="-150;250;-150" dur="5s" repeatCount="indefinite"/>
+  </text>
 
-      <div class="lines">
-        <span class="line" style="--i:7">ניווט חכם — בקליק אחד.</span>
-        <span class="line" style="--i:8">מופעל ב-AI.</span>
-      </div>
+  <!-- לווין ראשי גדול -->
+  <circle r="9" fill="#fff" stroke="#00f6ff" stroke-width="2">
+    <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
+      <mpath xlink:href="#orbit1"/>
+    </animateMotion>
+  </circle>
 
-      <div class="contact">
-        <a class="btn" style="--i:9" href="tel:+972546488811">📞 ‎+972-54-6488811</a>
-        <a class="btn" style="--i:10" href="mailto:benziheler@gmail.com">✉️ benziheler@gmail.com</a>
-        <a class="btn" style="--i:11" href="https://wa.me/972546488811" target="_blank">💬 שלחו הודעת WhatsApp</a>
-      </div>
-    </main>
-  </div>
+  <!-- לווין קטן ראשון -->
+  <circle r="5" fill="#fff" stroke="#a78bfa" stroke-width="1.5">
+    <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
+      <mpath xlink:href="#orbit2"/>
+    </animateMotion>
+  </circle>
+
+  <!-- לווין קטן שני -->
+  <circle r="5" fill="#fff" stroke="#f472b6" stroke-width="1.5">
+    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+      <mpath xlink:href="#orbit3"/>
+    </animateMotion>
+  </circle>
+</svg>
 </body>
 </html>
