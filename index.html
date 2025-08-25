@@ -9,15 +9,13 @@
     --bg1:#0b1220; --bg2:#0f172a; --bg3:#111827;
     --panel:#0e1627cc; --white:#fff; --muted:#cdd6e5;
     --stroke:#243045; --chip:#0f193080; --chip-stroke:#21314b;
-    --delay-step:360ms;
-    --enter:1.35s;
-    --bg-dur:38s;
+    --delay-step:360ms; --enter:1.35s; --bg-dur:38s;
+    --brand-1:#60a5fa; --brand-2:#a78bfa; --brand-3:#34d399;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    direction:rtl;
+    margin:0; direction:rtl;
     font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Hebrew",Arial,sans-serif;
     color:var(--white);
     background:
@@ -26,8 +24,7 @@
       linear-gradient(135deg,var(--bg1),var(--bg2) 50%,var(--bg3));
     background-size:140% 140%;
     animation: moveBg var(--bg-dur) ease-in-out infinite alternate;
-    display:grid; place-items:center;
-    padding:20px;
+    display:grid; place-items:center; padding:20px;
   }
   @keyframes moveBg{
     0% {background-position:0% 0%,100% 100%,0% 0%}
@@ -43,35 +40,47 @@
     backdrop-filter:saturate(120%) blur(6px);
     box-shadow:0 26px 64px #0008, inset 0 1px 0 #ffffff16;
   }
-  /* לוגו */
+
+  /* אייקון גלובוס */
   .logo{display:flex;justify-content:center;margin-bottom:20px}
   .globe{width:220px;height:220px;filter:drop-shadow(0 0 12px #000a)}
+
   /* כותרת */
   h2{margin:8px 0 12px;font-size:clamp(36px,7vw,64px)}
-  /* שורות טקסט */
+
+  /* שורות טקסט נכנסות */
   .lines{margin-top:10px}
-  .line{display:block;color:var(--muted);font-size:clamp(16px,2.2vw,20px);
+  .line{
+    display:block;color:var(--muted);font-size:clamp(16px,2.2vw,20px);
     line-height:1.95;opacity:0;transform:translateX(38px);
     animation: enterRight var(--enter) ease-out forwards;
-    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);}
+    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);
+  }
   .line b{color:#fff}
   @keyframes enterRight{to{opacity:1; transform:translateX(0)}}
+
   /* נקודות */
   .bullets{margin-top:16px;display:grid;gap:12px;justify-items:center}
-  .item{display:flex;gap:12px;align-items:center;color:var(--muted);
+  .item{
+    display:flex;gap:12px;align-items:center;color:var(--muted);
     font-size:clamp(15px,2vw,19px);padding:12px 18px;border-radius:14px;
     background:var(--chip);border:1px solid var(--chip-stroke);
     opacity:0;transform:translateX(38px);
     animation: enterRight var(--enter) ease-out forwards;
-    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);}
+    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);
+  }
+
   /* כפתורי יצירת קשר */
   .contact{margin-top:30px;display:flex;flex-direction:column;gap:12px;align-items:center}
-  .btn{display:inline-block;width:min(75%,360px);text-align:center;
+  .btn{
+    display:inline-block;width:min(75%,360px);text-align:center;
     padding:13px 20px;border-radius:12px;border:1px solid #1f2937;
-    background:linear-gradient(180deg,#60a5fa,#3b82f6);color:#0b1220;font-weight:900;text-decoration:none;
+    background:linear-gradient(180deg,#60a5fa,#3b82f6);
+    color:#0b1220;font-weight:900;text-decoration:none;
     opacity:0;transform:translateX(38px);
     animation: enterRight var(--enter) ease-out forwards;
-    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);}
+    animation-delay: calc(var(--i)*var(--delay-step) + 260ms);
+  }
   .btn:hover{background:#3aa8ff;transform:translateY(-2px);box-shadow:0 6px 16px rgba(56,189,248,.35)}
   @media (max-width:520px){.btn{width:100%}}
 </style>
@@ -80,23 +89,34 @@
   <div class="wrap">
     <main class="card">
 
-      <!-- ========= גלובוס עם טקסט GoThereAI ========= -->
+      <!-- ========= גלובוס עם טקסט GoThere + AI (דו-טון + Fade + Sheen) ========= -->
       <div class="logo">
-        <svg class="globe" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg class="globe" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="GoThereAI globe">
           <defs>
+            <!-- מילוי כדור -->
             <radialGradient id="earthGradient" cx="50%" cy="50%" r="60%">
               <stop offset="0%" stop-color="#6ee7ff"/>
               <stop offset="70%" stop-color="#2563eb"/>
               <stop offset="100%" stop-color="#1e40af"/>
             </radialGradient>
+
+            <!-- מסלולים -->
             <path id="orbit1" d="M 100,15 A 85,85 0 1,1 99.9,15 Z" fill="none"/>
             <path id="orbit2" d="M 100,25 A 75,75 0 1,1 99.9,25 Z" fill="none"/>
             <path id="orbit3" d="M 100,40 A 60,60 0 1,1 99.9,40 Z" fill="none"/>
+
+            <!-- שיין אופקי -->
             <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
               <stop offset="40%" stop-color="#fff" stop-opacity="0.9"/>
               <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
             </linearGradient>
+
+            <!-- קליפ לטקסט (GoThere + AI ביחד) -->
+            <clipPath id="clipBrandText">
+              <text x="100" y="109" text-anchor="middle" font-size="24" font-weight="1000">GoThere</text>
+              <text x="152" y="109" text-anchor="middle" font-size="24" font-weight="1000">AI</text>
+            </clipPath>
           </defs>
 
           <!-- כדור -->
@@ -112,11 +132,35 @@
             <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="10s" repeatCount="indefinite"/>
           </ellipse>
 
-          <!-- טקסט GoThereAI במרכז -->
-          <text x="100" y="115" text-anchor="middle" fill="#ffffffdd" font-weight="900" font-size="26">GoThereAI</text>
-          <text x="100" y="115" text-anchor="middle" fill="url(#shine)" font-weight="900" font-size="26">GoThereAI
-            <animate attributeName="x" values="-150;250;-150" dur="6s" repeatCount="indefinite"/>
-          </text>
+          <!-- טקסט מרכזי דו-טון: GoThere (כחול-סגול) + AI (ירקרק/סגול) -->
+          <g opacity="0.0">
+            <!-- GoThere -->
+            <text x="100" y="109" text-anchor="middle" font-size="24" font-weight="1000" fill="url(#gtGrad)">GoThere</text>
+            <!-- AI -->
+            <text x="152" y="109" text-anchor="middle" font-size="24" font-weight="1000" fill="url(#aiGrad)">AI</text>
+
+            <!-- אנימציית fade in/out על כל הקבוצה -->
+            <animate attributeName="opacity" values="0;1;0" dur="8s" repeatCount="indefinite"/>
+          </g>
+
+          <!-- גרדיאנטים לטקסטים -->
+          <defs>
+            <linearGradient id="gtGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#60a5fa"/>
+              <stop offset="100%" stop-color="#a78bfa"/>
+            </linearGradient>
+            <linearGradient id="aiGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#34d399"/>
+              <stop offset="100%" stop-color="#a78bfa"/>
+            </linearGradient>
+          </defs>
+
+          <!-- שיין שחוצה את הטקסט (מופיע רק איפה שיש אותיות) -->
+          <g clip-path="url(#clipBrandText)" opacity=".9">
+            <rect x="-160" y="82" width="120" height="54" fill="url(#shine)">
+              <animate attributeName="x" values="-160;260;-160" dur="6.2s" repeatCount="indefinite"/>
+            </rect>
+          </g>
 
           <!-- לוויין גדול -->
           <circle r="9" fill="#fff" stroke="#00f6ff" stroke-width="2">
