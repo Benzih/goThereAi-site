@@ -91,96 +91,79 @@
 
       <!-- ========= גלובוס עם טקסט GoThere + AI (דו-טון + Fade + Sheen) ========= -->
       <div class="logo">
-        <svg class="globe" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="GoThereAI globe">
-          <defs>
-            <!-- מילוי כדור -->
-            <radialGradient id="earthGradient" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stop-color="#6ee7ff"/>
-              <stop offset="70%" stop-color="#2563eb"/>
-              <stop offset="100%" stop-color="#1e40af"/>
-            </radialGradient>
+       <svg class="globe" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="GoThereAI globe">
+  <defs>
+    <!-- מילוי כדור -->
+    <radialGradient id="earthGradient" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#6ee7ff"/>
+      <stop offset="70%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </radialGradient>
 
-            <!-- מסלולים -->
-            <path id="orbit1" d="M 100,15 A 85,85 0 1,1 99.9,15 Z" fill="none"/>
-            <path id="orbit2" d="M 100,25 A 75,75 0 1,1 99.9,25 Z" fill="none"/>
-            <path id="orbit3" d="M 100,40 A 60,60 0 1,1 99.9,40 Z" fill="none"/>
+    <!-- מסלולים -->
+    <path id="orbit1" d="M 100,15 A 85,85 0 1,1 99.9,15 Z" fill="none"/>
+    <path id="orbit2" d="M 100,25 A 75,75 0 1,1 99.9,25 Z" fill="none"/>
+    <path id="orbit3" d="M 100,40 A 60,60 0 1,1 99.9,40 Z" fill="none"/>
 
-            <!-- שיין אופקי -->
-            <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
-              <stop offset="40%" stop-color="#fff" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-            </linearGradient>
+    <!-- שיין -->
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#fff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
 
-            <!-- קליפ לטקסט (GoThere + AI ביחד) -->
-            <clipPath id="clipBrandText">
-              <text x="100" y="109" text-anchor="middle" font-size="24" font-weight="1000">GoThere</text>
-              <text x="152" y="109" text-anchor="middle" font-size="24" font-weight="1000">AI</text>
-            </clipPath>
-          </defs>
+    <!-- גרדיאנט דו־צבעי לטקסט -->
+    <linearGradient id="wordGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#60a5fa"/>
+      <stop offset="60%" stop-color="#a78bfa"/>
+      <stop offset="61%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
 
-          <!-- כדור -->
-          <circle cx="100" cy="100" r="85" fill="url(#earthGradient)" stroke="#ffffff33" stroke-width="2">
-            <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite"/>
-          </circle>
+    <!-- קליפ לשיין -->
+    <clipPath id="clipBrandText">
+      <text x="100" y="109" text-anchor="middle" font-size="28" font-weight="1000">GoThereAI</text>
+    </clipPath>
+  </defs>
 
-          <!-- קווי "תלת מימד" -->
-          <ellipse cx="100" cy="100" rx="70" ry="20" stroke="#38bdf877" fill="none">
-            <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="12s" repeatCount="indefinite"/>
-          </ellipse>
-          <ellipse cx="100" cy="100" rx="50" ry="15" stroke="#60a5fa55" fill="none">
-            <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="10s" repeatCount="indefinite"/>
-          </ellipse>
+  <!-- הכדור -->
+  <circle cx="100" cy="100" r="85" fill="url(#earthGradient)" stroke="#ffffff33" stroke-width="2">
+    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite"/>
+  </circle>
 
-          <!-- טקסט מרכזי דו-טון: GoThere (כחול-סגול) + AI (ירקרק/סגול) -->
-          <g opacity="0.0">
-            <!-- GoThere -->
-            <text x="100" y="109" text-anchor="middle" font-size="24" font-weight="1000" fill="url(#gtGrad)">GoThere</text>
-            <!-- AI -->
-            <text x="152" y="109" text-anchor="middle" font-size="24" font-weight="1000" fill="url(#aiGrad)">AI</text>
+  <!-- קווי "תלת מימד" -->
+  <ellipse cx="100" cy="100" rx="70" ry="20" stroke="#38bdf877" fill="none">
+    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="12s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="100" cy="100" rx="50" ry="15" stroke="#60a5fa55" fill="none">
+    <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="10s" repeatCount="indefinite"/>
+  </ellipse>
 
-            <!-- אנימציית fade in/out על כל הקבוצה -->
-            <animate attributeName="opacity" values="0;1;0" dur="8s" repeatCount="indefinite"/>
-          </g>
+  <!-- טקסט במרכז עם fade -->
+  <text x="100" y="109" text-anchor="middle" font-size="28" font-weight="1000" fill="url(#wordGrad)" opacity="0">
+    GoThereAI
+    <animate attributeName="opacity" values="0;1;0" dur="8s" repeatCount="indefinite"/>
+  </text>
 
-          <!-- גרדיאנטים לטקסטים -->
-          <defs>
-            <linearGradient id="gtGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%"  stop-color="#60a5fa"/>
-              <stop offset="100%" stop-color="#a78bfa"/>
-            </linearGradient>
-            <linearGradient id="aiGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%"  stop-color="#34d399"/>
-              <stop offset="100%" stop-color="#a78bfa"/>
-            </linearGradient>
-          </defs>
+  <!-- שיין שחוצה -->
+  <g clip-path="url(#clipBrandText)" opacity=".9">
+    <rect x="-160" y="82" width="120" height="54" fill="url(#shine)">
+      <animate attributeName="x" values="-160;260;-160" dur="6.2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
 
-          <!-- שיין שחוצה את הטקסט (מופיע רק איפה שיש אותיות) -->
-          <g clip-path="url(#clipBrandText)" opacity=".9">
-            <rect x="-160" y="82" width="120" height="54" fill="url(#shine)">
-              <animate attributeName="x" values="-160;260;-160" dur="6.2s" repeatCount="indefinite"/>
-            </rect>
-          </g>
+  <!-- לוויינים -->
+  <circle r="9" fill="#fff" stroke="#00f6ff" stroke-width="2">
+    <animateMotion dur="12s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#orbit1"/></animateMotion>
+  </circle>
+  <circle r="5" fill="#fff" stroke="#a78bfa" stroke-width="1.5">
+    <animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#orbit2"/></animateMotion>
+  </circle>
+  <circle r="5" fill="#fff" stroke="#f472b6" stroke-width="1.5">
+    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#orbit3"/></animateMotion>
+  </circle>
+</svg>
 
-          <!-- לוויין גדול -->
-          <circle r="9" fill="#fff" stroke="#00f6ff" stroke-width="2">
-            <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
-              <mpath xlink:href="#orbit1"/>
-            </animateMotion>
-          </circle>
-          <!-- לוויין קטן -->
-          <circle r="5" fill="#fff" stroke="#a78bfa" stroke-width="1.5">
-            <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
-              <mpath xlink:href="#orbit2"/>
-            </animateMotion>
-          </circle>
-          <!-- לוויין קטן נוסף -->
-          <circle r="5" fill="#fff" stroke="#f472b6" stroke-width="1.5">
-            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
-              <mpath xlink:href="#orbit3"/>
-            </animateMotion>
-          </circle>
-        </svg>
       </div>
 
       <h2>בקרוב</h2>
